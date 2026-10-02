@@ -1,6 +1,11 @@
 // Entry point: daftarkan semua custom element di sini.
-import "./components/AppBar.js";
+import './components/AppBar.js';
+import './components/NoteItem.js';
+import './components/NoteList.js';
+import { notesData } from './data/notesData.js';
 
-// Tahap 3 nanti: import NoteList, NoteItem + render notesData.
-// Tahap 4 nanti: import NoteForm + wiring submit.
-console.log("main.js jalan, AppBar terdaftar.");
+// W1: tampilkan semua dummy saat pertama load.
+const list = document.querySelector('note-list');
+list.notes = notesData;
+
+console.log(`main.js jalan, ${notesData.length} catatan dirender.`);
