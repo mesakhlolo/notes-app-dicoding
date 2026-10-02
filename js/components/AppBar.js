@@ -42,16 +42,17 @@ class AppBar extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
+        :host { display: block; }
         header {
-          background: #222831;
+          background: linear-gradient(135deg, #222831 0%, #393e46 100%);
           color: white;
-          padding: 1.5rem;
+          padding: 1.75rem 1.5rem;
           text-align: center;
+          border-bottom: 4px solid #00adb5;
         }
-        h1 { margin: 0; }
-        p { margin: 0.25rem 0 0; opacity: 0.8; }
+        h1 { margin: 0; font-size: 1.6rem; letter-spacing: 0.5px; }
+        p { margin: 0.35rem 0 0; opacity: 0.75; font-size: 0.95rem; }
       </style>
-      
       <header>
         <h1>${title}</h1>
         <p>${subtitle}</p>
