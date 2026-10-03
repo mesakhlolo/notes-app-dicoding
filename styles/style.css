@@ -1,4 +1,5 @@
 :root {
+  /* Palet utama: latar, kartu, teks, aksen */
   --bg: #f8f9fa;
   --card: #ffffff;
   --text: #222831;
@@ -17,7 +18,6 @@ body {
   line-height: 1.6;
 }
 
-.app-header,
 footer {
   background: var(--text);
   color: white;
@@ -29,52 +29,21 @@ main {
   max-width: 1100px;
   margin: 0 auto;
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 main h2 {
+  /* Penanda section dengan garis aksen kiri */
   font-size: 1.35rem;
   margin: 0 0 1rem;
   padding-left: 0.75rem;
   border-left: 4px solid var(--accent);
 }
 
-.form-section {
-  margin-bottom: 2rem;
-  background: var(--card);
-  border-radius: 14px;
-  padding: 1.25rem 1.5rem;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 0.06);
-}
-
-.hint {
-  color: #666;
-}
-
-/* W3: container daftar WAJIB grid — reviewer cek via inspect */
-.notes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
-}
-
-.note-card {
-  background: var(--card);
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
-}
-
-.note-card h3 {
-  margin: 0 0 0.5rem;
-}
-
-.note-card time {
-  font-size: 0.85rem;
-  color: #666;
-}
-
-/* O4: breakpoint eksplisit — auto-fill sudah fluid, ini menegaskan ke reviewer */
 @media (max-width: 600px) {
+  /* HP: 1 kolom, padding rapat */
   main { padding: 1rem; }
 }
 

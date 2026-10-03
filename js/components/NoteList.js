@@ -1,4 +1,3 @@
-// Tahap 3b: container grid (W3 + W4). Tugasnya: terima array, lahirkan <note-item>.
 class NoteList extends HTMLElement {
   constructor() {
     super();
@@ -6,7 +5,7 @@ class NoteList extends HTMLElement {
     this._notes = [];
   }
 
-  // Dipanggil dari main.js: list.notes = notesData
+  // Entry point: main.js mengisi array catatan lewat properti ini.
   set notes(data) {
     this._notes = Array.isArray(data) ? data : [];
     this.render();
@@ -21,8 +20,6 @@ class NoteList extends HTMLElement {
   }
 
   render() {
-    // Grid WAJIB di dalam shadow karena <note-list> adalah container daftar (W3).
-    // Class .notes-grid dipertahankan agar reviewer bisa inspect sesuai rubric.
     this.shadowRoot.innerHTML = `
       <style>
         .notes-grid {
@@ -36,9 +33,10 @@ class NoteList extends HTMLElement {
     `;
 
     const grid = this.shadowRoot.querySelector('.notes-grid');
+    // Satu data -> satu <note-item>. Setter .note memicu render kartu.
     this._notes.forEach((note) => {
       const item = document.createElement('note-item');
-      item.note = note; // <-- ini memicu NoteItem.render()
+      item.note = note;
       grid.appendChild(item);
     });
   }

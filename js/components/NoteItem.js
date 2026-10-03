@@ -1,13 +1,11 @@
-// Tahap 3a: kartu per catatan (W1 + W4)
-// Cara pakai (kayak props di React): item.note = { id, title, body, createdAt }
 class NoteItem extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: 'open' });
     this._note = null;
   }
 
-  // Dipanggil dari NoteList: element.note = data
+  // Entry point: NoteList mengisi satu objek catatan lewat properti ini.
   set note(data) {
     this._note = data;
     this.render();
@@ -21,28 +19,17 @@ class NoteItem extends HTMLElement {
     if (this._note) this.render();
   }
 
-  // TODO(human): ubah data -> tampilan. Isi 2 bagian di bawah.
-  // Bagian 1: format tanggal createdAt (ISO string) jadi "28 Jul 2022" yang readable.
-  // Bagian 2: tampilkan title + body + tanggal di shadow DOM.
-  //
-  // Trade-off:
-  // - toLocaleDateString('id-ID', {...}) => "28 Juli 2022", user-friendly, disarankan.
-  // - new Date(x).toISOString().slice(0,10) => "2022-07-28", mesin-friendly tapi kaku.
-  // - body: tampilkan langsung, atau potong 150 karakter + "..." biar kartu rata?
-  //   (potong rapi tapi info kepotong vs full tapi kartu beda tinggi)
   render() {
     if (!this._note) return;
     const { title, body, createdAt } = this._note;
 
-    // createdAt contoh: "2022-07-28T10:03:12.594Z" (ISO) -> "28 Juli 2022"
+    // createdAt disimpan sebagai ISO string, tampilkan dalam format lokal.
     const date = new Date(createdAt).toLocaleDateString('id-ID', {
       day: 'numeric',
       month: 'long',
       year: 'numeric',
     });
 
-    // Shadow DOM: style luar (style.css) TIDAK masuk ke sini,
-    // jadi kartu harus bawa <style>-nya sendiri.
     this.shadowRoot.innerHTML = `
       <style>
         :host { display: block; height: 100%; }
@@ -81,4 +68,4 @@ class NoteItem extends HTMLElement {
   }
 }
 
-customElements.define("note-item", NoteItem);
+customElements.define('note-item', NoteItem);
