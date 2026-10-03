@@ -1,9 +1,14 @@
 :root {
-  /* Palet utama: latar, kartu, teks, aksen */
-  --bg: #f8f9fa;
-  --card: #ffffff;
-  --text: #222831;
-  --accent: #00adb5;
+  /* Warm paper + ink + bata. Maks 4 warna + netral. */
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --ink: #1c1917;
+  --muted: #78716c;
+  --line: #e7e5e4;
+  --accent: #ea580c;
+  --danger: #dc2626;
+  --sans: 'Geist', -apple-system, 'Segoe UI', Inter, system-ui, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
 }
 
 * {
@@ -12,45 +17,60 @@
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: var(--sans);
   background: var(--bg);
-  color: var(--text);
+  color: var(--ink);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.35rem;
+}
+
+main h2 {
+  font-size: 1.25rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
 }
 
 footer {
-  background: var(--text);
-  color: white;
+  border-top: 1px solid var(--line);
   padding: 1.5rem;
   text-align: center;
 }
 
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-main h2 {
-  /* Penanda section dengan garis aksen kiri */
-  font-size: 1.35rem;
-  margin: 0 0 1rem;
-  padding-left: 0.75rem;
-  border-left: 4px solid var(--accent);
+footer p {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
 }
 
 @media (max-width: 600px) {
-  /* HP: 1 kolom, padding rapat */
-  main { padding: 1rem; }
+  /* HP: 1 kolom, padding rapat, tombol full-width (diatur di shadow form) */
+  main { padding: 1.5rem 1rem; gap: 2rem; }
 }
 
 @media (min-width: 601px) and (max-width: 900px) {
-  main { padding: 1.25rem; }
+  main { padding: 2rem 1.25rem; }
 }
 
 @media (min-width: 901px) {
-  main { padding: 1.5rem; }
+  main { padding: 2.5rem 1.5rem; }
 }

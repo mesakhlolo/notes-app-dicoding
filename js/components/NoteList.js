@@ -24,7 +24,7 @@ class NoteList extends HTMLElement {
       <style>
         .notes-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
           gap: 1.25rem;
           align-items: stretch;
         }

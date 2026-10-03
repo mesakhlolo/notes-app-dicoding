@@ -85,35 +85,65 @@ class NoteForm extends HTMLElement {
       <style>
         :host { display: block; }
         form {
-          background: white;
-          border-radius: 14px;
-          padding: 1.25rem 1.5rem;
-          box-shadow: 0 2px 8px rgb(0 0 0 / 0.06);
+          background: #ffffff;
+          border: 1px solid #e7e5e4;
+          border-radius: 16px;
+          padding: 1.25rem;
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 0.6rem;
         }
-        label { font-weight: 600; font-size: 0.9rem; }
+        label {
+          font-family: 'Geist Mono', ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
+          font-size: 0.72rem;
+          font-weight: 500;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #78716c;
+        }
         input, textarea {
-          font: inherit;
-          padding: 0.6rem 0.75rem;
-          border: 1.5px solid #ddd;
-          border-radius: 8px;
+          font-family: 'Geist', -apple-system, 'Segoe UI', Inter, system-ui, sans-serif;
+          font-size: 0.9rem;
+          padding: 0.65rem 0.8rem;
+          border: 1px solid #e7e5e4;
+          border-radius: 10px;
+          background: #fafaf9;
+          color: #1c1917;
         }
-        input:focus, textarea:focus { outline: none; border-color: #00adb5; }
-        textarea { min-height: 90px; resize: vertical; }
-        .error { color: #d93025; font-size: 0.82rem; margin: -0.4rem 0 0; min-height: 1.1em; }
-        button:disabled { background: #ccc; cursor: not-allowed; }
-        button:not(:disabled):hover { filter: brightness(0.92); }
+        input:focus, textarea:focus {
+          outline: none;
+          border-color: #ea580c;
+          background: #ffffff;
+          box-shadow: 0 0 0 3px rgb(234 88 12 / 0.12);
+        }
+        textarea { min-height: 96px; resize: vertical; line-height: 1.6; }
+        .error {
+          font-family: 'Geist Mono', ui-monospace, Menlo, Consolas, monospace;
+          font-size: 0.75rem;
+          color: #dc2626;
+          margin: 0;
+          min-height: 1.1em;
+        }
         button {
+          margin-top: 0.25rem;
           align-self: flex-start;
-          background: #00adb5;
+          font-family: 'Geist Mono', ui-monospace, Menlo, Consolas, monospace;
+          font-size: 0.8rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          background: #ea580c;
           color: white;
           border: none;
-          border-radius: 8px;
-          padding: 0.6rem 1.25rem;
-          font-weight: 700;
+          border-radius: 10px;
+          padding: 0.65rem 1.25rem;
           cursor: pointer;
+          transition: filter 0.15s ease, transform 0.15s ease;
+        }
+        button:not(:disabled):hover { filter: brightness(0.94); }
+        button:not(:disabled):active { transform: translateY(1px); }
+        button:disabled { background: #e7e5e4; color: #a8a29e; cursor: not-allowed; }
+        @media (max-width: 600px) {
+          button { align-self: stretch; text-align: center; }
         }
       </style>
       <form>
@@ -123,7 +153,7 @@ class NoteForm extends HTMLElement {
         <label for="body">Isi</label>
         <textarea id="body" placeholder="Tulis catatanmu di sini..." required></textarea>
         <p class="error" id="body-error" aria-live="polite"></p>
-        <button type="submit" id="submit-btn">Tambah Catatan</button>
+        <button type="submit" id="submit-btn">+ Tambah Catatan</button>
       </form>
     `;
   }

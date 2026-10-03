@@ -24,20 +24,60 @@ class AppBar extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
-        :host { display: block; }
-        header {
-          background: linear-gradient(135deg, #222831 0%, #393e46 100%);
-          color: white;
-          padding: 1.75rem 1.5rem;
-          text-align: center;
-          border-bottom: 4px solid #00adb5;
+        :host {
+          display: block;
+          position: sticky;
+          top: 0;
+          z-index: 10;
         }
-        h1 { margin: 0; font-size: 1.6rem; letter-spacing: 0.5px; }
-        p { margin: 0.35rem 0 0; opacity: 0.75; font-size: 0.95rem; }
+        header {
+          background: rgba(250, 250, 249, 0.85);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border-bottom: 1px solid #e7e5e4;
+        }
+        .wrap {
+          max-width: 1120px;
+          margin: 0 auto;
+          padding: 0.9rem 1.5rem;
+          display: flex;
+          align-items: baseline;
+          gap: 0.75rem;
+        }
+        .mark {
+          font-family: 'Geist Mono', ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: #ea580c;
+          white-space: nowrap;
+        }
+        h1 {
+          margin: 0;
+          font-family: 'Geist', -apple-system, 'Segoe UI', Inter, system-ui, sans-serif;
+          font-size: 1.05rem;
+          font-weight: 650;
+          letter-spacing: -0.01em;
+          color: #1c1917;
+        }
+        p {
+          margin: 0 0 0 auto;
+          font-family: 'Geist', -apple-system, 'Segoe UI', Inter, system-ui, sans-serif;
+          font-size: 0.82rem;
+          color: #78716c;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        @media (max-width: 600px) {
+          p { display: none; }
+        }
       </style>
       <header>
-        <h1>${title}</h1>
-        <p>${subtitle}</p>
+        <div class="wrap">
+          <span class="mark">~/notes</span>
+          <h1>${title}</h1>
+          <p>${subtitle}</p>
+        </div>
       </header>
     `;
   }
