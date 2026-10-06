@@ -6,14 +6,15 @@ const BASE_URL = 'https://notes-api.dicoding.dev/v2';
 const NotesApi = {
   // GET /notes → mengembalikan array [{ id, title, body, createdAt, archived }]
   async getNotes() {
-    // TODO(human): isi 5-10 baris fetch untuk ambil daftar catatan.
-    // Langkah:
-    // 1. fetch(`${BASE_URL}/notes`)
-    // 2. cek response.ok, kalau tidak ok lempar Error
-    // 3. const json = await response.json()
-    // 4. return json.data (array-nya, bukan seluruh json!)
-    // Contoh shape sukses: { status: 'success', message: '...', data: [...] }
-    throw new Error('getNotes() belum diimplementasi — kerjakan ini dulu!');
+    const response = await fetch(`${BASE_URL}/notes`);
+    if (!response.ok) {
+      throw new Error(`Gagal memuat catatan (${response.status})`);
+    }
+    const json = await response.json();
+    if (!Array.isArray(json.data)) {
+      throw new Error('Format data API tidak valid');
+    }
+    return json.data;
   },
 
   // POST /notes dengan body { title, body } — akan kita kerjakan setelah getNotes lolos.
