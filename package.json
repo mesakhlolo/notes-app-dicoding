@@ -1,0 +1,33 @@
+{
+  "name": "notes-app-dicoding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-dev": "webpack serve --config webpack.dev.js --open",
+    "build": "webpack --config webpack.prod.js",
+    "format": "prettier --write \"src/**/*.{js,css,html}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mesakhlolo/notes-app-dicoding.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/mesakhlolo/notes-app-dicoding/issues"
+  },
+  "homepage": "https://github.com/mesakhlolo/notes-app-dicoding#readme",
+  "devDependencies": {
+    "css-loader": "^7.1.5",
+    "html-webpack-plugin": "^5.6.8",
+    "prettier": "^3.9.9",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.111.1",
+    "webpack-cli": "^7.2.3",
+    "webpack-dev-server": "^6.0.0",
+    "webpack-merge": "^6.0.1"
+  }
+}
