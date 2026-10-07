@@ -1,10 +1,8 @@
-// Lapisan API terpusat (W2 + W4).
-// main.js TIDAK boleh fetch langsung — selalu lewat objek ini.
-// Base URL wajib: https://notes-api.dicoding.dev/v2
+// Semua fetch ke Dicoding hanya lewat sini agar error konsisten (W2 + W4).
 const BASE_URL = 'https://notes-api.dicoding.dev/v2';
 
 const NotesApi = {
-  // GET /notes → mengembalikan array [{ id, title, body, createdAt, archived }]
+  // Unwrap json.data karena server selalu bungkus payload.
   async getNotes() {
     const response = await fetch(`${BASE_URL}/notes`);
     if (!response.ok) {
@@ -17,21 +15,17 @@ const NotesApi = {
     return json.data;
   },
 
-  // POST /notes dengan body { title, body } → mengembalikan object { id, title, body, ... }
-  // Bedanya dengan GET: butuh method, headers, body JSON. Return object, bukan array.
+  // Header JSON wajib agar server mau parse body.
   async createNote({ title, body }) {
     const response = await fetch(`${BASE_URL}/notes`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        title: title,
-        body: body,
-      }),
+      body: JSON.stringify({ title, body }),
     });
     if (!response.ok) {
-      throw new Error('Gagal menambahkan catatan');
+      throw new Error(`Gagal menambahkan catatan (${response.status})`);
     }
     const json = await response.json();
     if (!json.data?.id) {
@@ -40,9 +34,15 @@ const NotesApi = {
     return json.data;
   },
 
-  // DELETE /notes/{note_id} — akan kita kerjakan setelah create lolos.
+  // Server tidak kirim data balik saat hapus, cukup kembalikan true.
   async deleteNote(noteId) {
-    throw new Error('deleteNote() belum diimplementasi — nanti.');
+    const response = await fetch(`${BASE_URL}/notes/${noteId}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error(`Gagal menghapus catatan (${response.status})`);
+    }
+    return true;
   },
 };
 
