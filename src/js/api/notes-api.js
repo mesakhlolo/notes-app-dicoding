@@ -44,6 +44,39 @@ const NotesApi = {
     }
     return true;
   },
+
+  // Arsip: daftar terpisah dari aktif.
+  async getArchived() {
+    const response = await fetch(`${BASE_URL}/notes/archived`);
+    if (!response.ok) {
+      throw new Error(`Gagal memuat arsip (${response.status})`);
+    }
+    const json = await response.json();
+    if (!Array.isArray(json.data)) {
+      throw new Error('Format data API tidak valid');
+    }
+    return json.data;
+  },
+
+  async archiveNote(noteId) {
+    const response = await fetch(`${BASE_URL}/notes/${noteId}/archive`, {
+      method: 'POST',
+    });
+    if (!response.ok) {
+      throw new Error(`Gagal mengarsipkan (${response.status})`);
+    }
+    return true;
+  },
+
+  async unarchiveNote(noteId) {
+    const response = await fetch(`${BASE_URL}/notes/${noteId}/unarchive`, {
+      method: 'POST',
+    });
+    if (!response.ok) {
+      throw new Error(`Gagal membatalkan arsip (${response.status})`);
+    }
+    return true;
+  },
 };
 
 export default NotesApi;
