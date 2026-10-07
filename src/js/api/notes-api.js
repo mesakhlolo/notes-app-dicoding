@@ -17,9 +17,27 @@ const NotesApi = {
     return json.data;
   },
 
-  // POST /notes dengan body { title, body } — akan kita kerjakan setelah getNotes lolos.
+  // POST /notes dengan body { title, body } → mengembalikan object { id, title, body, ... }
+  // Bedanya dengan GET: butuh method, headers, body JSON. Return object, bukan array.
   async createNote({ title, body }) {
-    throw new Error('createNote() belum diimplementasi — nanti setelah getNotes.');
+    const response = await fetch(`${BASE_URL}/notes`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: title,
+        body: body,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error('Gagal menambahkan catatan');
+    }
+    const json = await response.json();
+    if (!json.data?.id) {
+      throw new Error('Format data API tidak valid');
+    }
+    return json.data;
   },
 
   // DELETE /notes/{note_id} — akan kita kerjakan setelah create lolos.
