@@ -1,35 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notes App</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet"
-  />
-</head>
-<body>
-  <app-bar title="Notes App" subtitle="Catat ide, jangan biarkan hilang."></app-bar>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <app-bar title="Notes App" subtitle="Catat ide, jangan biarkan hilang."></app-bar>
 
-  <main>
-    <section>
-      <p class="eyebrow">$ new-note</p>
-      <h2>Tambah Catatan</h2>
-      <note-form></note-form>
-    </section>
+    <main>
+      <section>
+        <p class="eyebrow">$ new-note</p>
+        <h2>Tambah Catatan</h2>
+        <note-form></note-form>
+      </section>
 
-    <section>
-      <p class="eyebrow">$ ls notes</p>
-      <h2>Daftar Catatan</h2>
-      <note-list></note-list>
-    </section>
-  </main>
+      <section>
+        <p class="eyebrow">$ ls notes</p>
+        <h2>Daftar Catatan</h2>
+        <note-list></note-list>
+      </section>
+    </main>
 
-  <footer>
-    <p>notes-app v1.0 &mdash; built with vanilla js</p>
-  </footer>
-</body>
+    <footer>
+      <p>notes-app v1.0 &mdash; built with vanilla js</p>
+    </footer>
+    <loading-indicator></loading-indicator>
+  </body>
 </html>
