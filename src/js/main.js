@@ -3,17 +3,29 @@ import './components/AppBar.js';
 import './components/NoteItem.js';
 import './components/NoteList.js';
 import './components/NoteForm.js';
-import { notesData } from './data/notesData.js';
+import NotesApi from './api/notes-api.js';
 
-// Salinan array agar data asli tidak termutasi langsung.
-const notes = [...notesData];
-
-// Render awal seluruh catatan.
 const list = document.querySelector('note-list');
-list.notes = notes;
 
-// Catatan baru dari form disisipkan paling atas lalu list di-render ulang.
-document.querySelector('note-form').addEventListener('add-note', (e) => {
-  notes.unshift(e.detail);
-  list.notes = notes;
+// Muat daftar dari API saat halaman dibuka.
+async function loadNotes() {
+  try {
+    const notes = await NotesApi.getNotes();
+    list.notes = notes;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+loadNotes();
+
+// Tambah via API lalu muat ulang agar id dari server yang dipakai.
+document.querySelector('note-form').addEventListener('add-note', async (e) => {
+  try {
+    const { title, body } = e.detail;
+    await NotesApi.createNote({ title, body });
+    await loadNotes();
+  } catch (error) {
+    console.error(error.message);
+  }
 });
