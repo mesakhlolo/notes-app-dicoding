@@ -21,7 +21,7 @@ class NoteItem extends HTMLElement {
 
   render() {
     if (!this._note) return;
-    const { title, body, createdAt } = this._note;
+    const { title, body, createdAt, archived } = this._note;
 
     // createdAt disimpan sebagai ISO string, tampilkan dalam format lokal.
     const date = new Date(createdAt)
@@ -31,6 +31,9 @@ class NoteItem extends HTMLElement {
         year: 'numeric',
       })
       .toUpperCase();
+
+    // Label arsip ikut status agar satu tombol untuk dua arah.
+    const archiveLabel = archived ? 'Batal Arsip' : 'Arsip';
 
     this.shadowRoot.innerHTML = `
       <style>
@@ -100,13 +103,35 @@ class NoteItem extends HTMLElement {
           border-color: #fca5a5;
         }
         #delete-btn:active { transform: translateY(1px); }
+        .actions { display: flex; gap: 0.5rem; }
+        #archive-btn {
+          font-family: 'Geist Mono', ui-monospace, Menlo, Consolas, monospace;
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          background: #fff7ed;
+          color: #ea580c;
+          border: 1px solid #fed7aa;
+          border-radius: 8px;
+          padding: 0.35rem 0.7rem;
+          cursor: pointer;
+          transition: background 0.15s ease, border-color 0.15s ease;
+        }
+        #archive-btn:hover {
+          background: #ffedd5;
+          border-color: #fdba74;
+        }
+        #archive-btn:active { transform: translateY(1px); }
       </style>
       <article>
         <h3>${title}</h3>
         <p>${body}</p>
         <div class="footer">
           <time>${date}</time>
-          <button id="delete-btn" type="button">Hapus</button>
+          <div class="actions">
+            <button id="archive-btn" type="button">${archiveLabel}</button>
+            <button id="delete-btn" type="button">Hapus</button>
+          </div>
         </div>
       </article>
     `;
@@ -116,6 +141,16 @@ class NoteItem extends HTMLElement {
       this.dispatchEvent(
         new CustomEvent('delete-note', {
           detail: this._note.id,
+          bubbles: true,
+          composed: true,
+        })
+      );
+    });
+
+    this.shadowRoot.querySelector('#archive-btn').addEventListener('click', () => {
+      this.dispatchEvent(
+        new CustomEvent('toggle-archive', {
+          detail: { id: this._note.id, archived: this._note.archived },
           bubbles: true,
           composed: true,
         })
