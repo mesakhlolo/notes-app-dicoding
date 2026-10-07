@@ -24,6 +24,14 @@
       <section>
         <p class="eyebrow">$ ls notes</p>
         <h2>Daftar Catatan</h2>
+        <div class="tabs" role="tablist">
+          <button id="tab-active" class="tab active" type="button">
+            Aktif <span id="count-active" class="badge">0</span>
+          </button>
+          <button id="tab-archived" class="tab" type="button">
+            Arsip <span id="count-archived" class="badge">0</span>
+          </button>
+        </div>
         <note-list></note-list>
       </section>
     </main>

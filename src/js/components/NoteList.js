@@ -28,15 +28,31 @@ class NoteList extends HTMLElement {
           gap: 1.25rem;
           align-items: stretch;
         }
+        /* O3: kartu masuk satu-per-satu, halus 0.4s. */
+        note-item {
+          animation: card-in 0.4s ease both;
+        }
+        @keyframes card-in {
+          from {
+            opacity: 0;
+            transform: translateY(12px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
       </style>
       <div class="notes-grid"></div>
     `;
 
     const grid = this.shadowRoot.querySelector('.notes-grid');
     // Satu data -> satu <note-item>. Setter .note memicu render kartu.
-    this._notes.forEach((note) => {
+    // Delay bertingkat max 0.5s agar tidak kelamaan saat banyak kartu.
+    this._notes.forEach((note, i) => {
       const item = document.createElement('note-item');
       item.note = note;
+      item.style.animationDelay = `${Math.min(i * 60, 500)}ms`;
       grid.appendChild(item);
     });
   }
