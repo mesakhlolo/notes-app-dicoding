@@ -29,3 +29,13 @@ document.querySelector('note-form').addEventListener('add-note', async (e) => {
     console.error(error.message);
   }
 });
+
+// Hapus via API lalu muat ulang. Event datang dari <note-item> di dalam <note-list>.
+document.addEventListener('delete-note', async (e) => {
+  try {
+    await NotesApi.deleteNote(e.detail);
+    await loadNotes();
+  } catch (error) {
+    console.error(error.message);
+  }
+});

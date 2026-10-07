@@ -75,13 +75,52 @@ class NoteItem extends HTMLElement {
           letter-spacing: 0.06em;
           color: #a8a29e;
         }
+        .footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
+          margin-top: 0.25rem;
+        }
+        #delete-btn {
+          font-family: 'Geist Mono', ui-monospace, Menlo, Consolas, monospace;
+          font-size: 0.72rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          background: transparent;
+          color: #dc2626;
+          border: 1px solid #fecaca;
+          border-radius: 8px;
+          padding: 0.35rem 0.7rem;
+          cursor: pointer;
+          transition: background 0.15s ease, border-color 0.15s ease;
+        }
+        #delete-btn:hover {
+          background: #fef2f2;
+          border-color: #fca5a5;
+        }
+        #delete-btn:active { transform: translateY(1px); }
       </style>
       <article>
         <h3>${title}</h3>
         <p>${body}</p>
-        <time>${date}</time>
+        <div class="footer">
+          <time>${date}</time>
+          <button id="delete-btn" type="button">Hapus</button>
+        </div>
       </article>
     `;
+
+    // Tombol di dalam Shadow DOM tidak tembus keluar, jadi teruskan sebagai event.
+    this.shadowRoot.querySelector('#delete-btn').addEventListener('click', () => {
+      this.dispatchEvent(
+        new CustomEvent('delete-note', {
+          detail: this._note.id,
+          bubbles: true,
+          composed: true,
+        })
+      );
+    });
   }
 }
 
