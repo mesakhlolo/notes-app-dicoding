@@ -8,9 +8,7 @@ class NoteForm extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this.shadowRoot
-      .querySelector('form')
-      .addEventListener('submit', (e) => this._onSubmit(e));
+    this.shadowRoot.querySelector('form').addEventListener('submit', (e) => this._onSubmit(e));
     this.shadowRoot.querySelector('#title').addEventListener('input', () => {
       this._touched.title = true;
       this._validate();
@@ -72,7 +70,7 @@ class NoteForm extends HTMLElement {
         detail: note,
         bubbles: true,
         composed: true,
-      }),
+      })
     );
 
     this.shadowRoot.querySelector('form').reset();
